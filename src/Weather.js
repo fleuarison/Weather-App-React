@@ -71,7 +71,7 @@ export default function Weather() {
             </footer>
             <small>
               <a
-                href="https://github.com/fleuarison/vanilla-weather_app"
+                href="https://github.com/fleuarison/weather-app-react"
                 target="_blank"
               >
                 Open-source code
