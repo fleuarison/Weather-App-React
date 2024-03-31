@@ -3,92 +3,84 @@ import axios from "axios";
 
 import "./Weather.css";
 
-export default function Weather(props) {
-  const [city, setCity] = useState("");
-  const [loader, setLoader] = useState(false);
-  const [WeatherElements, setWeatherElements] = useState({});
-
-  function showWeatherElements(response) {
-    setLoader(true);
-    setWeatherElements({
-      temperature: response.data.main.temp,
-      description: response.data.weather[0].description,
-      humidity: response.data.main.humidity,
-      wind: response.data.wind.speed,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-    });
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    let apiKey = "6782253072f7d90462731a624097fc54";
-    let units = "metric";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(showWeatherElements);
-  }
-
-  function updateCity(event) {
-    setCity(event.target.value);
-  }
-
-  let form = (
-        <form className="weather-app" onSubmit={handleSubmit}>
-          <label for="city" className="form-label">
-            Enter a city
-          </label>
-          <input type="search" placeholder="City" onChange={updateCity}/>
-          <input type="submit" className="btn btn-primary" value="Search" />
-        </form>
-  );
-  if (loader) {
+export default function Weather() {
+    let WeatherData = {
+      city: "Antananarivo",
+      date: "Tuesday 16: 00",
+      description: "Cloudy",
+      imgUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
+      humidity: 35,
+      wind: 27,
+      temperature: 19,
+    };
     return (
-      <div>
-        {form}
-        <div className="card-body">
-          <h1 className="card-title">{props.data.city}</h1>
-        </div>
-
-        <br />
-        <div className="container text-center">
-          <div className="row align-items-center">
-            <div className="col">
-              <div className="today">{props.data.date}</div>
-              <div className="adjective">{props.data.description}</div>
-              <div className="clearfix weather-temperature">
-                <img
-                  src={WeatherElements.icon}
-                  alt={WeatherElements.description}
-                  className="float-left"
-                  width="50"
-                />
-              </div>
-            </div>
-            <div className="col">
-              <div className="caracteristic">
-                Humidity :{
-" "}
-                <span className="humidity">{WeatherElements.humidity}</span> %
-                <br />
-                Wind : <span className="wind">{WeatherElements.wind}</span> km/h
-              </div>
-            </div>
-            <div className="col">
-              <strong>
-                <span className="temperatureToday">
-                {Math.round(WeatherElements.temperature)}
-                </span>
-                <span className="conversion">
-                  <a href="#" className="active">
-                    °C
-                  </a>{" "}
-                  |<a href="#">°F</a>
-                </span>
-              </strong>
-            </div>
+      <div className="Weather">
+        <div className="card" style={{ width: "600px" }}>
+          <form className="weather-app">
+            <label for="city" className="form-label">
+              Enter a city
+            </label>
+            <input type="text" placeholder="City" />
+            <input type="submit" className="btn btn-primary" value="Search" />
+          </form>
+          <div className="card-body">
+            <h1 className="card-title">{WeatherData.city}</h1>
           </div>
+  
+          <br />
+          <div className="container text-center">
+            <div className="row align-items-center">
+              <div className="col">
+                <div className="today">{WeatherData.date}</div>
+                <div className="adjective">{WeatherData.description}</div>
+                <div className="clearfix weather-temperature">
+                  <img
+                    src={WeatherData.imgUrl}
+                    alt={WeatherData.description}
+                    className="float-left"
+                    width="50"
+                  />
+                </div>
+              </div>
+              <div className="col">
+                <div className="caracteristic">
+                  Humidity :{" "}
+                  <span className="humidity">{WeatherData.humidity}</span> %
+                  <br />
+                  Wind : <span className="wind">{WeatherData.wind}</span> km/h
+                </div>
+              </div>
+              <div className="col">
+                <strong>
+                  <span className="temperatureToday">
+                    {WeatherData.temperature}
+                  </span>
+                  <span className="conversion">
+                    <a href="#" className="active">
+                      °C
+                    </a>{" "}
+                    |<a href="#">°F</a>
+                  </span>
+                </strong>
+              </div>
+            </div>
+            <footer>
+              <div className="card">
+                <div className="weather-forecast" id="forecast"></div>
+              </div>
+            </footer>
+            <small>
+              <a
+                href="https://github.com/fleuarison/vanilla-weather_app"
+                target="_blank"
+              >
+                Open-source code
+              </a>
+              by Fleuria RANOROARISON
+            </small>
+          </div>
+        </div>
       </div>
-      </div> );
-  } else {
-return form;
+    );
   }
-  }
+  
