@@ -74,9 +74,9 @@ export default function Weather() {
                 href="https://github.com/fleuarison/weather-app-react"
                 target="_blank"
               >
-                Open-source code
+                Open-source code 
               </a>
-              by Fleuria RANOROARISON
+              {" "} by Fleuria RANOROARISON
             </small>
           </div>
         </div>
