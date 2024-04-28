@@ -1,42 +1,50 @@
 import React, { useState } from "react";
 import axios from "axios";
-
 import "./Weather.css";
 
-export default function Weather() {
-    let WeatherData = {
-      city: "Antananarivo",
-      date: "Tuesday 16: 00",
-      description: "Cloudy",
-      imgUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
-      humidity: 35,
-      wind: 27,
-      temperature: 19,
-    };
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ready:false});
+  function handleResponse(response){
+    setWeatherData({
+      ready : true,
+      temperature: response.data.main.temp,
+      humidity: response.data.main.humidity,
+      city: response.data.name,
+      date : "Sunday 13:00",
+      description : response.data.weather[0].description,
+      wind: response.data.wind.speed,
+      iconUrl : "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+    });
+  }
+
+  if (weatherData.ready){
     return (
       <div className="Weather">
         <div className="card" style={{ width: "600px" }}>
           <form className="weather-app">
-            <label for="city" className="form-label">
-              Enter a city
-            </label>
-            <input type="text" placeholder="City" />
+          <div className="row">
+          <div className="col-9">
+            <input type="text" className="form-control" placeholder="Enter a city" autoFocus="on"/>
+            </div>
+          <div className="col-3">
             <input type="submit" className="btn btn-primary" value="Search" />
+            </div>
+            </div>
           </form>
           <div className="card-body">
-            <h1 className="card-title">{WeatherData.city}</h1>
+            <h1 className="card-title">{weatherData.city}</h1>
           </div>
   
           <br />
           <div className="container text-center">
             <div className="row align-items-center">
               <div className="col">
-                <div className="today">{WeatherData.date}</div>
-                <div className="adjective">{WeatherData.description}</div>
+                <div className="today">{weatherData.date}</div>
+                <div className="text-capitalize">{weatherData.description}</div>
                 <div className="clearfix weather-temperature">
                   <img
-                    src={WeatherData.imgUrl}
-                    alt={WeatherData.description}
+                    src="https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png"
+                    alt="Cloudy"
                     className="float-left"
                     width="50"
                   />
@@ -45,15 +53,16 @@ export default function Weather() {
               <div className="col">
                 <div className="caracteristic">
                   Humidity :{" "}
-                  <span className="humidity">{WeatherData.humidity}</span> %
+                  <span className="humidity">{weatherData.humidity}</span> %
                   <br />
-                  Wind : <span className="wind">{WeatherData.wind}</span> km/h
+                  Wind : {" "} 
+                  <span className="wind">{weatherData.wind}</span> km/h
                 </div>
               </div>
               <div className="col">
                 <strong>
                   <span className="temperatureToday">
-                    {WeatherData.temperature}
+                    {Math.round(weatherData.temperature)}
                   </span>
                   <span className="conversion">
                     <a href="#" className="active">
@@ -78,9 +87,17 @@ export default function Weather() {
               </a>
               {" "} by Fleuria RANOROARISON
             </small>
+            </div>
           </div>
         </div>
-      </div>
     );
+
+  } else {
+    const apiKey = "6782253072f7d90462731a624097fc54";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+
+    return "Loading...";
   }
+}
   
