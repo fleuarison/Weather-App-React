@@ -25,8 +25,7 @@ export default function WeatherDegree(props){
     );
 } else {
     let fahreinheit = (props.celsius * 9)/5 + 32;
-    return 
-    (
+    return     (
         <div className="WeatherDegree">
         <span className="temperatureToday">
         {Math.round(fahreinheit)}

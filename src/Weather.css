@@ -7,31 +7,32 @@ body {
     display: block;
     padding: 20px;
     border: 1px solid grey;
-    background: radial-gradient(
-      401px at 50.6% -0.3%,
-      rgba(255, 255, 255, 0.31) 1.2%,
-      rgb(36, 212, 219) 100.2%
-    );
+    background-image: url(./images/bluesky.jpg);
   }
   .weather form {
     margin: auto;
     display: block;
   }
   
-  .weather .col .caracteristic {
+  .col .caracteristic {
     font-weight: 200;
     font-size: 18px;
-    color: #fff;
+    color: #dbd8d8;
   }
   
   .humidity {
     font-size: 25px;
     font-weight: 300;
+    color: #7c7c7c;
   }
   
+  .text-capitalize {
+    color: #0B5ED7;
+  }
   .wind {
     font-size: 25px;
     font-weight: 300;
+    color: #7c7c7c;
   }
   
   .temperatureToday {
@@ -45,7 +46,7 @@ body {
     font-size: 40px;
     text-align: center;
     font-weight: 100;
-    text-shadow: blue 1px 0 10px;
+    color: #7c7c7c;
   }
   
   .today {
@@ -61,14 +62,14 @@ body {
   
   small {
     font-family: monospace;
-    color: #7c7c7c;
+    color: #dbd8d8;
   }
   
   .conversion a {
     text-decoration: none;
   }
   .conversion .active {
-    color: rgb(33, 33, 33);
+    color: #dbd8d8;
     cursor: default;
   }
   
