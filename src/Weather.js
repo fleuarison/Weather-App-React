@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import WeatherInfos from "./WeatherInfos";
+import WeatherForecast from "./WeatherForecast";
 import axios from "axios";
 import {ThreeDots} from 'react-loader-spinner';
 import "./Weather.css";
@@ -53,18 +54,11 @@ setCity(event.target.value);
           <WeatherInfos data={weatherData}/>
             <footer>
               <div className="card">
-                <div className="weather-forecast" id="forecast"></div>
+                <div className="weather-forecast" id="forecast">
+                  <WeatherForecast />
+                </div>
               </div>
             </footer>
-            <small>
-              <a
-                href="https://github.com/fleuarison/weather-app-react"
-                target="_blank"
-              >
-                Open-source code 
-              </a>
-              {" "} by Fleuria RANOROARISON
-            </small>
             </div>
           </div>);
   } else {
