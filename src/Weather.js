@@ -19,7 +19,8 @@ export default function Weather(props) {
       description : response.data.weather[0].description,
       wind: response.data.wind.speed,
       iconUrl : `https://openweathermap.org/img/wn/response.data.weather[0].icon@2x.png`,
-      icon : response.data.weather[0].icon
+      icon : response.data.weather[0].icon,
+      coordinates : response.data.coord,
     });
   }
 
@@ -55,7 +56,7 @@ setCity(event.target.value);
             <footer>
               <div className="card">
                 <div className="weather-forecast" id="forecast">
-                  <WeatherForecast />
+                  <WeatherForecast coordinates={weatherData.coordinates} />
                 </div>
               </div>
             </footer>
