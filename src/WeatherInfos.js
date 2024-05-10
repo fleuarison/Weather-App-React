@@ -20,7 +20,7 @@ export default function WeatherInfos(props) {
         <div className="text-capitalize">{props.data.description}</div>
         <div className="clearfix weather-temperature">
         <div className="float-left">
-          <WeatherIcon code={props.data.icon} size ={50}/>
+          <WeatherIcon code={props.data.icon} size ={50} height ={100} />
           </div>
         </div>
       </div>
